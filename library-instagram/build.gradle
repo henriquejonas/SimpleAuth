@@ -41,6 +41,19 @@ dependencies {
     implementation deps.gson
 }
 
+task deleteJar(type: Delete) {
+    delete 'libs/jars/simpleauth-instagram.jar'
+}
+
+task createJar(type: Copy) {
+    from('build/intermediates/bundles/release/')
+    into('libs/jars/')
+    include('classes.jar')
+    rename('classes.jar', 'simpleauth-instagram.jar')
+}
+
+createJar.dependsOn(deleteJar, build)
+
 android.buildTypes.debug.manifestPlaceholders = [
     instagramClientId    : "76bedc2d27dd4e52841e576d4ce8cc79",
     instagramClientSecret: "28d91eb23ab440beb55b3a3f112f4bb2",

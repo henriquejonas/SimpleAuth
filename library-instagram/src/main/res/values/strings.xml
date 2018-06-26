@@ -1,3 +1,4 @@
 <resources>
     <string name="sa_loading">Loading......</string>
+    <string name="ssl_error_certificate">O certificado de acesso está com problemas. Deseja continuar?</string>
 </resources>

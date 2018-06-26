@@ -2,12 +2,16 @@ package com.jaychang.sa.instagram;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -84,6 +88,26 @@ public class InstagramAuthActivity extends SimpleAuthActivity {
           return true;
         }
         return false;
+      }
+
+      @Override
+      public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(InstagramAuthActivity.this);
+        builder.setMessage(R.string.ssl_error_certificate);
+        builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            handler.proceed();
+          }
+        });
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            handler.cancel();
+          }
+        });
+        final AlertDialog dialog = builder.create();
+        dialog.show();
       }
     });
 
