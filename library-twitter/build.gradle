@@ -40,6 +40,13 @@ dependencies {
     api deps.twitterSdk
 }
 
+tasks.withType(Javadoc).all {
+    excludes = ['**/*.kt']
+
+    enabled = false
+    options.addBooleanOption('Xdoclint:none', true)
+}
+
 android.buildTypes.debug.manifestPlaceholders = [
     twitterConsumerKey   : "r59jTevJfWg6YDGldRGiks8Rl",
     twitterConsumerSecret: "MQAQtngew0imjGduM3mEbWE1fdUbGOekYEcvm0ybCoJy5FUrju",
