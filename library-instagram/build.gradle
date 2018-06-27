@@ -52,6 +52,13 @@ task createJar(type: Copy) {
     rename('classes.jar', 'simpleauth-instagram.jar')
 }
 
+tasks.withType(Javadoc).all {
+    excludes = ['**/*.kt']
+
+    enabled = false
+    options.addBooleanOption('Xdoclint:none', true)
+}
+
 createJar.dependsOn(deleteJar, build)
 
 android.buildTypes.debug.manifestPlaceholders = [

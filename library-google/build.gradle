@@ -40,6 +40,13 @@ dependencies {
     api deps.googleAuth
 }
 
+tasks.withType(Javadoc).all {
+    excludes = ['**/*.kt']
+
+    enabled = false
+    options.addBooleanOption('Xdoclint:none', true)
+}
+
 android.buildTypes.debug.manifestPlaceholders = [
     googleWebClientId: "775503623453-sqk59kuvr2f8qkb9fkcnhef5uvn9riu4.apps.googleusercontent.com",
 ]

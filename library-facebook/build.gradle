@@ -40,6 +40,13 @@ dependencies {
     api deps.facebookSdk
 }
 
+tasks.withType(Javadoc).all {
+    excludes = ['**/*.kt']
+
+    enabled = false
+    options.addBooleanOption('Xdoclint:none', true)
+}
+
 android.buildTypes.debug.manifestPlaceholders = [
     facebookAppId: "189953571452011",
 ]

@@ -50,6 +50,13 @@ task createJar(type: Copy) {
     rename('classes.jar', 'simpleauth-common.jar')
 }
 
+tasks.withType(Javadoc).all {
+    excludes = ['**/*.kt']
+
+    enabled = false
+    options.addBooleanOption('Xdoclint:none', true)
+}
+
 createJar.dependsOn(deleteJar, build)
 
 publish {

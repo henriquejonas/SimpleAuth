@@ -29,5 +29,8 @@ task clean(type: Delete) {
 }
 
 tasks.withType(Javadoc).all {
+    excludes = ['**/*.kt']
+
     enabled = false
+    options.addBooleanOption('Xdoclint:none', true)
 }
